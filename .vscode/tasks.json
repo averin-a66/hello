@@ -1,0 +1,119 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "rake",
+			"task": "db:migrate",
+			"problemMatcher": [],
+			"label": "Выполнить миграцию",
+			"group": "build"
+		},
+		{
+			"type": "rake",
+			"task": "db:rollback",
+			"problemMatcher": [],
+			"label": "Откатить последнюю выполенную миграцию",
+			"group": "build"
+		},
+		{
+			"type": "shell",
+			"command": "bundle",
+			"args": ["install"],
+			"problemMatcher": [],
+			"label": "bundle install",
+			"group": "build"
+		},
+		{
+			"label": "Создать новый контроллер ...",
+			"type": "shell",
+			"command": "rails",
+			"args": [
+			  "generate", "controller",
+			  "${input:controllerName}"
+			],
+			"runOptions": {
+			  "reevaluateOnRerun": false
+			},
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Создать новую модель ...",
+			"type": "shell",
+			"command": "rails",
+			"args": [
+			  "generate", "model",
+			  "${input:modelName}"
+			],
+			"runOptions": {
+			  "reevaluateOnRerun": false
+			},
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Добавить свойства в модель ...",
+			"type": "shell",
+			"command": "rails",
+			"args": [
+			  "generate", "migration",
+			  "add_fields_to_${input:modelName}",
+			  "${input:memberName}"
+			],
+			"runOptions": {
+			  "reevaluateOnRerun": false
+			},
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Удалить свойство из модели ...",
+			"type": "shell",
+			"command": "rails",
+			"args": [
+			  "generate", "migration",
+			  "remove_${input:memberName}_from_${input:modelName}",
+			  "${input:memberName}:${input:typeDd}"
+			],
+			"runOptions": {
+			  "reevaluateOnRerun": false
+			},
+			"problemMatcher": [],
+			"group": "build"
+		}
+	],
+    "inputs": [
+      {
+        "id": "controllerName",
+        "type": "promptString",
+        "description": "Controller name"
+      },
+	  {
+        "id": "modelName",
+        "type": "promptString",
+        "description": "Model name"
+      },
+	 	  {
+        "id": "memberName",
+        "type": "promptString",
+        "description": "Member name"
+      },
+	  {
+        "id": "migrationName",
+        "type": "promptString",
+        "description": "Migration name"
+      },
+	  {
+        "id": "typeDd",
+        "type": "pickString",
+        "description": "Тип данных",
+		"options": [
+			"primary_key", "bigserial", "string", "text", "integer", "float", "decimal", "datetime", "time", "date"
+			,"daterange", "numrange", "tsrange", "tstzrange", "int4range", "int8range", "binary", "boolean", "bigint"
+			,"xml", "tsvector", "hstore", "inet", "cidr", "macaddr", "uuid", "json", "jsonb", "ltree", "citext"
+			,"point", "bit", "bit_varying", "money"
+		],
+		"default": "string"
+      }
+    ]
+}
