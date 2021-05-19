@@ -93,7 +93,12 @@
         "type": "promptString",
         "description": "Model name"
       },
-	 	  {
+	  {
+        "id": "tableName",
+        "type": "promptString",
+        "description": "Table name"
+      },
+	  {
         "id": "memberName",
         "type": "promptString",
         "description": "Member name"
